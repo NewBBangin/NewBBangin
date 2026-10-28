@@ -6,6 +6,8 @@ namespace Hyunwoo.Scripts.Skill
 {
     public class SkillManager : MonoBehaviour
     {
+        // 싱글톤 사용
+        
         public static SkillManager Instance { get; private set; }
 
         [SerializeField] private List<SkillSO> skillList;
