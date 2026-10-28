@@ -11,5 +11,7 @@ namespace Hyunwoo.Scripts.Skill
     {
         public abstract void Init();
         public abstract void Run();
+        
+        // Test
     }
 }
