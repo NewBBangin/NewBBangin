@@ -1,0 +1,28 @@
+URP-PSX by Kodrin / Codrin-Mihail
+Repository: https://github.com/Kodrin/URP-PSX
+License: MIT, copyright (c) 2020 Codrin-Mihail; full license in LICENSE.txt
+Pinned commit: 83670002c8893b0e9156c6145684697f38b712ec
+Retrieved: 2026-10-21
+
+Unmodified source snapshots (stored as .txt to avoid compiling legacy shaders):
+  Dithering.shader.original.txt
+    URP-PSX/Assets/Shaders/Dithering.shader
+  DitheringPatterns.cginc.original.txt
+    URP-PSX/Assets/Shaders/cginc/DitheringPatterns.cginc
+  Pixelation.shader.original.txt
+    URP-PSX/Assets/Shaders/Pixelation.shader
+
+Raw source root:
+https://raw.githubusercontent.com/Kodrin/URP-PSX/83670002c8893b0e9156c6145684697f38b712ec/
+
+Adaptation in Assets/RetroToon/Shaders/RetroPrint.shader:
+  - Pixelation and color-precision floor operations adapted from Pixelation.shader.
+  - Screen-coordinate 4x4 matrix indexing adapted from Dithering.shader.
+  - Replaced binary brightness cutout with centered Bayer color quantization.
+  - Replaced UnityCG / mesh blit with URP 17 Core Blit and XR texture macros.
+  - Added depth/normal ink edges, orthographic depth support, static grain,
+    perceptual color grading, color-registration offset, and effect blending.
+
+The upstream project targets Unity 2019.3 / URP 7.1.8. Its old renderer-feature
+scripts are intentionally not imported. The adapted shader uses the existing
+Unity 6 Full Screen Pass Renderer Feature.

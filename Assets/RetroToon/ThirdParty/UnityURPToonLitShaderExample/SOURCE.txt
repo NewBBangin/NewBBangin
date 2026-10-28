@@ -1,0 +1,25 @@
+Upstream: UnityURPToonLitShaderExample
+Author: ColinLeung-NiloCat
+Repository: https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
+Commit: fbe276e0df1d1f9379e13581c20b6a080a1a6977
+Retrieved: 2026-10-21
+License: MIT (included in LICENSE.txt)
+
+Pinned files downloaded verbatim from raw.githubusercontent.com:
+https://raw.githubusercontent.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample/fbe276e0df1d1f9379e13581c20b6a080a1a6977/LICENSE
+https://raw.githubusercontent.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample/fbe276e0df1d1f9379e13581c20b6a080a1a6977/SimpleURPToonLitOutlineExample_LightingEquation.hlsl
+https://raw.githubusercontent.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample/fbe276e0df1d1f9379e13581c20b6a080a1a6977/SimpleURPToonLitOutlineExample_Shared.hlsl
+
+Original HLSL files are stored with .txt extensions as reference sources to avoid
+importing the original example shader or conflicting with project shader names.
+
+Adaptation in ../../Shaders/RetroToonForward.hlsl:
+- ShadeSingleLight's smoothstep(N dot L) cel band and shadow-map attenuation.
+- ShadeGI's constant ambient spherical-harmonic term.
+- CompositeAllLightResults' maximum of ambient and direct light.
+- A compact shared UnityPerMaterial layout, matching the example's architecture.
+
+Project changes: simplified opaque material, adjustable texture influence, explicit
+shadow tint strength, current URP 17 shadow coordinate handling and official URP
+ShadowCaster/DepthOnly/DepthNormals passes. Outlines are a separate fullscreen
+renderer feature. This project uses only the public MIT example, not NiloToonURP.
