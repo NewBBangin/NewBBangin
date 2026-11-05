@@ -10,7 +10,10 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24ef2371-0645-4e4d-89ae-f70a8770003f" name="변경" comment="" />
+    <list default="true" id="24ef2371-0645-4e4d-89ae-f70a8770003f" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NewBBangin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewBBangin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CHO/CHOScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CHO/CHOScene.unity" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,10 +27,73 @@
     <setting file="file://$PROJECT_DIR$/Assets/Hyunwoo/Scripts/Skill/SkillManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Hyunwoo/Scripts/Skill/TestSkill.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0,
-  "fromUser": false
-}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0639942811328924" />
+      <entry key="MS500" value="2.7678641942584177" />
+      <entry key="S2" value="5.509502900521281" />
+      <entry key="S5" value="6.8104170581461965" />
+      <entry key="S10" value="7.366069788410972" />
+      <entry key="S30" value="7.779224461651758" />
+      <entry key="S60" value="7.888377370265615" />
+      <entry key="M2" value="7.943875947287536" />
+      <entry key="M5" value="7.977474800571186" />
+      <entry key="M10" value="7.9887247601889575" />
+      <entry key="M15" value="7.992480361301866" />
+      <entry key="M30" value="7.996238773759522" />
+      <entry key="H1" value="7.99811903500444" />
+      <entry key="H2" value="7.9990594295143245" />
+      <entry key="H4" value="7.999529692757804" />
+      <entry key="D1" value="7.9999216124039645" />
+      <entry key="W1" value="7.999988801697159" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9441036977761295" />
+      <entry key="MS500" value="2.6775952874709614" />
+      <entry key="S2" value="5.383847120034727" />
+      <entry key="S5" value="6.7271068403312535" />
+      <entry key="S10" value="7.3163796936433965" />
+      <entry key="S30" value="7.760559512715919" />
+      <entry key="S60" value="7.878759897906428" />
+      <entry key="M2" value="7.938994183983433" />
+      <entry key="M5" value="7.975504336575154" />
+      <entry key="M10" value="7.987736548869" />
+      <entry key="M15" value="7.9918208902290235" />
+      <entry key="M30" value="7.995908706095655" />
+      <entry key="H1" value="7.997953918072267" />
+      <entry key="H2" value="7.998976850264624" />
+      <entry key="H4" value="7.999488397935981" />
+      <entry key="D1" value="7.999914729211769" />
+      <entry key="W1" value="7.99998781836631" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3LJpRRQQAmFRAC6HfvtBJvvDyuX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,6 +102,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -44,7 +111,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "Hyunwo",
+    "git-widget-placeholder": "Wonyoung",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
