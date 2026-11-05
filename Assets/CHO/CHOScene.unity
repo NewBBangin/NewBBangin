@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2238180060850143430, guid: 564b3decaa65db543bc4c84f297a02ee, type: 3}
       propertyPath: m_Name
-      value: Visual
+      value: CarVisual
       objectReference: {fileID: 0}
     - target: {fileID: 2956367806010071810, guid: 564b3decaa65db543bc4c84f297a02ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -174,7 +174,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2238180060850143430, guid: 564b3decaa65db543bc4c84f297a02ee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1393277565}
   m_SourcePrefab: {fileID: 100100000, guid: 564b3decaa65db543bc4c84f297a02ee, type: 3}
 --- !u!4 &197123517 stripped
 Transform:
@@ -672,6 +675,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &1393277564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2238180060850143430, guid: 564b3decaa65db543bc4c84f297a02ee, type: 3}
+  m_PrefabInstance: {fileID: 197123516}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1393277565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393277564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f78a84d4a0f7e45a76c735c31c8294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarRotation
 --- !u!1 &1517909702
 GameObject:
   m_ObjectHideFlags: 0
