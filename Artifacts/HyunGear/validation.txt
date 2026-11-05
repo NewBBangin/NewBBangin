@@ -1,0 +1,14 @@
+HyunScene gear assets: 13 passed, 0 failed
+PASS Single gear is a saved prefab
+PASS Pair is a saved prefab
+PASS Pair follows Car
+PASS Pair aligned to offset Visual
+PASS Exactly two spinning gears
+PASS Opposite rotation directions
+PASS Visual-only attachments add no collision shapes
+PASS All mesh references are persistent
+PASS All materials have supported shaders
+PASS Left Gear has a 16-tooth blade
+PASS Left Gear clears ground
+PASS Right Gear has a 16-tooth blade
+PASS Right Gear clears ground

@@ -1,0 +1,3 @@
+Both blades rotate in Play Mode: True
+Gears remain children of moving Car: True
+Car movement distance: 5.522
