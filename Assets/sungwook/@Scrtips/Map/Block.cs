@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public struct Block
 {
+    public FloorType floorType;
     public BlockType blockType;
     public GameObject blockPrefab;
     public BlockDataSO blockDataSO;

@@ -5,6 +5,7 @@ public enum FloorType
 {
     Empty,
     Floor_01,
+    Floor_02,
 }
 
 public enum BlockType
@@ -16,7 +17,7 @@ public enum BlockType
 public class MapManager : Singleton<MapManager>
 {
     [Header("References")]
-    public Transform cameraTransform; 
+    public Transform cameraTransform;
     public GameObject chunkPrefab;
 
     [Header("Settings")]
@@ -32,7 +33,7 @@ public class MapManager : Singleton<MapManager>
     private List<Chunk> chunkPool;
     private Queue<Chunk> activeChunks;
     private float nextSpawnZ = 0f;
-    private float chunkLength = 10f;
+    private float chunkLength;
 
     void Awake()
     {
@@ -43,10 +44,7 @@ public class MapManager : Singleton<MapManager>
     {
         if (IsInitialized) return;
         
-        if (floorData != null)
-        {
-            chunkLength = floorData.chunkSizeZ;
-        }
+        chunkLength = floorData.chunkSizeZ;
         
         chunkPool = new List<Chunk>();
         activeChunks = new Queue<Chunk>();
@@ -55,7 +53,7 @@ public class MapManager : Singleton<MapManager>
         IsInitialized = true;
     }
 
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < poolSize; ++i)
         {
@@ -72,12 +70,12 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    void Update()
+    private void Update()
     {
         CheckChunks();
     }
     
-    void SpawnChunk()
+    private void SpawnChunk()
     {
         Chunk chunk = GetPooledChunk();
         
@@ -93,7 +91,7 @@ public class MapManager : Singleton<MapManager>
         }
     }
     
-    void CheckChunks()
+    private void CheckChunks()
     {
         if (activeChunks.Count == 0) return;
         
@@ -106,19 +104,6 @@ public class MapManager : Singleton<MapManager>
             
             SpawnChunk();
         }
-    }
-
-    public void AddFloor(FloorType floorType, Chunk chunk)
-    {
-        if (!FloorDict.ContainsKey(floorType))
-        {
-            FloorDict.Add(floorType, chunk);
-        }
-    }
-
-    public bool ContainsFloor(FloorType floorType)
-    {
-        return FloorDict.ContainsKey(floorType);
     }
     
     Chunk GetPooledChunk()
