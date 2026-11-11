@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b33cd9f40756b4f95c9d73656e32c6, type: 3}
+  m_Name: Floor_Type01
+  m_EditorClassIdentifier: Assembly-CSharp::MapDataSO
+  chunkSizeX: 10
+  chunkSizeY: 5
+  chunkSizeZ: 16
+  blocks:
+  - blockType: 0
+    blockPrefab: {fileID: 1562986145715394586, guid: 4db9366ad95e87044a91de1dc19ddf6f, type: 3}
+    blockDataSO: {fileID: 11400000, guid: ae489ccc71ef7ad458305273263159cc, type: 2}
+    xCount: 1
+    yCount: 1
+    zCount: 1
+  - blockType: 1
+    blockPrefab: {fileID: 1562986145715394586, guid: 6d845865abfa8474295ef95c508a6297, type: 3}
+    blockDataSO: {fileID: 11400000, guid: 0aa842ffdbd395643a4d00250c366728, type: 2}
+    xCount: 1
+    yCount: 1
+    zCount: 1
+  groundName: Floor00
+  groundPrefab: {fileID: 2572483066390513916, guid: 78587c53348521445920d8201c58b3cf, type: 3}
