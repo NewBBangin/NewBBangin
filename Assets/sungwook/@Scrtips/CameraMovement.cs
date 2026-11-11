@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameaMovement : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
     private float speed = 5f;

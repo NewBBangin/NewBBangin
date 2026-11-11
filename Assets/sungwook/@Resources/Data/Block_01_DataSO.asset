@@ -15,4 +15,3 @@ MonoBehaviour:
   xSize: 1
   ySize: 1
   zSize: 1
-  blockPrefab: {fileID: 1562986145715394586, guid: 4db9366ad95e87044a91de1dc19ddf6f, type: 3}

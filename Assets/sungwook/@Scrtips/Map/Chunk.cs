@@ -46,8 +46,8 @@ public class Chunk : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        GameObject prefabToSpawn = GetBlockPrefab(BlockType.Red);
-        if (prefabToSpawn == null) return;
+        var blockPrefabs = floorDataSO.CreateBlockPrefabLookup();
+        if (blockPrefabs.Count == 0) return;
 
         for (int x = 0; x < sizeX; x++)
         {
@@ -55,10 +55,11 @@ public class Chunk : MonoBehaviour
             {
                 for (int z = 0; z < sizeZ; z++)
                 {
-                    if (VoxelGrid[x, y, z] != FloorType.Empty)
+                    FloorType floorType = VoxelGrid[x, y, z];
+                    if (blockPrefabs.TryGetValue(floorType, out GameObject prefab) && prefab != null)
                     {
                         Vector3 localPos = new Vector3(x, y, z);
-                        GameObject block = Instantiate(prefabToSpawn, transform);
+                        GameObject block = Instantiate(prefab, transform);
                         block.transform.localPosition = localPos;
                     }
                 }
@@ -66,17 +67,6 @@ public class Chunk : MonoBehaviour
         }
     }
 
-    private GameObject GetBlockPrefab(BlockType type)
-    {
-        if (floorDataSO == null || floorDataSO.blocks == null) return null;
-        
-        foreach (var block in floorDataSO.blocks)
-        {
-            if (block.blockType == type) return block.blockPrefab;
-        }
-        return null;
-    }
-    
     public void SetVoxelData(int x, int y, int z, FloorType type)
     {
         if (IsValidIndex(x, y, z))
