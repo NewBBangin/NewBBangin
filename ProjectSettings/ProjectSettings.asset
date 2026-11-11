@@ -66,9 +66,6 @@ PlayerSettings:
   useOSAutorotation: 1
   use32BitDisplayBuffer: 1
   preserveFramebufferAlpha: 0
-  adjustIOSFPSUsingThermalState: 1
-  thermalStateSeriousIOSFPS: 30
-  thermalStateCriticalIOSFPS: 15
   disableDepthAndStencilBuffers: 0
   androidStartInFullscreen: 1
   androidRenderOutsideSafeArea: 1
@@ -542,6 +539,9 @@ PlayerSettings:
   - m_BuildTarget: AndroidPlayer
     m_APIs: 150000000b000000
     m_Automatic: 0
+  - m_BuildTarget: WindowsStandaloneSupport
+    m_APIs: 150000001200000002000000
+    m_Automatic: 0
   m_BuildTargetVRSettings: []
   m_DefaultShaderChunkSizeInMB: 16
   m_DefaultShaderChunkCount: 0
@@ -832,7 +832,8 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
