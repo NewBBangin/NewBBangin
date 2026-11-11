@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,9 +7,13 @@ public class CarMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float sideSpeed;   // 추가: 좌우 속도 분리
+    [SerializeField] private float sideAccel;   // 누를 때 붙는 속도
+    [SerializeField] private float sideDecel;   // 뗄 때 멈추는 속도
+    [SerializeField] private float sideTurn;    // 반대 방향 눌렀을 때 꺾이는 속도
+    private float currentSide;              
     private Rigidbody _rigid;
     public Transform targetParent;
-    private Vector2 moveInput;
+    private Vector3 moveDir;
 
     private void Awake()
     {
@@ -19,16 +24,36 @@ public class CarMovement : MonoBehaviour
     private void Update()
     {
         Vector3 changeTrm = new Vector3(0, 0, 1) * Time.deltaTime * speed;
-        Vector3 sideMove = new Vector3(moveInput.x, 0, 0) * Time.deltaTime * sideSpeed;   // 변경: speed → sideSpeed
+        
+        float targetSide = moveDir.x * sideSpeed;
 
+        float rate = sideAccel;
+        if (moveDir.x == 0) rate = sideDecel;    
+        else if (currentSide != 0 && Mathf.Sign(targetSide) != Mathf.Sign(currentSide)) rate = sideTurn;
+        
+        currentSide = Mathf.MoveTowards(currentSide, targetSide, rate * Time.deltaTime);
+        Vector3 sideMove = new Vector3(currentSide, 0, 0) * Time.deltaTime;
+        
         if (targetParent != null)
         {
             targetParent.position += changeTrm + sideMove;
         }
     }
 
-    private void OnMove(InputValue value)
+    public void SetMove(Vector3 move)
     {
-        moveInput = value.Get<Vector2>();
+        moveDir = move;
     }
+
+    public void DownSpeed(float value)
+    {
+        speed -= value;
+    }
+
+    public void UpSpeed(float value)
+    {
+        speed += value;
+    }
+
+    
 }

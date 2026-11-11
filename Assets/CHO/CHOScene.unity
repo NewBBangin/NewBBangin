@@ -261,6 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarMovement
   speed: 10
   sideSpeed: 15
+  sideAccel: 20
+  sideDecel: 20
+  sideTurn: 20
   targetParent: {fileID: 485554576}
 --- !u!1 &444972589
 GameObject:
@@ -306,6 +309,8 @@ GameObject:
   - component: {fileID: 485554578}
   - component: {fileID: 485554577}
   - component: {fileID: 485554579}
+  - component: {fileID: 485554581}
+  - component: {fileID: 485554580}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -322,7 +327,7 @@ Transform:
   m_GameObject: {fileID: 485554575}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.38876, y: 0.58, z: -6.04174}
+  m_LocalPosition: {x: -9.38876, y: 0.58, z: -3.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -411,6 +416,30 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &485554580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485554575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f947c426626f0941bae8c1425eb0eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Car
+--- !u!114 &485554581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485554575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab4e1ebf3cd569409417881e819afcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarInput
 --- !u!1 &533430276
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f78a84d4a0f7e45a76c735c31c8294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRotation
+  _rotationValueRight: {x: 0, y: 20, z: 0}
+  _rotationValueLeft: {x: 0, y: -20, z: 0}
+  _rotationSpeed: 60
 --- !u!1 &1517909702
 GameObject:
   m_ObjectHideFlags: 0
