@@ -18,7 +18,7 @@ public class CarMovement : MonoBehaviour
     private void Awake()
     {
         _rigid = GetComponentInParent<Rigidbody>();
-        _rigid.isKinematic = true;   // 추가: 인스펙터에서 체크했으면 없어도 됨
+        _rigid.isKinematic = true;   // 인스펙터에서 체크했으면 없어도 됨
     }
 
     private void Update()
@@ -28,7 +28,7 @@ public class CarMovement : MonoBehaviour
         float targetSide = moveDir.x * sideSpeed;
 
         float rate = sideAccel;
-        if (moveDir.x == 0) rate = sideDecel;    
+        if (moveDir.x == 0) rate = sideDecel/2;
         else if (currentSide != 0 && Mathf.Sign(targetSide) != Mathf.Sign(currentSide)) rate = sideTurn;
         
         currentSide = Mathf.MoveTowards(currentSide, targetSide, rate * Time.deltaTime);
