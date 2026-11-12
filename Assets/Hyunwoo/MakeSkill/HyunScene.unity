@@ -233,7 +233,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &204913249
@@ -406,7 +406,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &239378311
@@ -990,7 +990,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &827749593
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1040113655
@@ -1336,7 +1336,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1055924961
@@ -1636,7 +1636,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1264530798
@@ -1989,7 +1989,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1567970722
@@ -2280,8 +2280,8 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 9
-  grindTime: 0.18
-  pieceForce: 8
+  grindTime: 0.2
+  pieceForce: 3.08
   pieceLifetime: 2.5
 --- !u!1 &1975147403
 GameObject:
@@ -2335,7 +2335,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1975147406
@@ -2614,7 +2614,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &2030728141

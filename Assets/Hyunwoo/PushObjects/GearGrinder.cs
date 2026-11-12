@@ -10,10 +10,12 @@ public class GearGrinder : MonoBehaviour
         if (!target || target.IsGrinding) return;
 
         target.Grind(transform, other.ClosestPoint(transform.position));
-        if (target.IsGrinding && grindSound)
-        {
-            grindSound.pitch = Random.Range(0.85f, 1.2f);
-            grindSound.Play();
-        }
+        
+        
+        // if (target.IsGrinding && grindSound)
+        // {
+        //     grindSound.pitch = Random.Range(0.85f, 1.2f);
+        //     grindSound.Play();
+        // }
     }
 }
