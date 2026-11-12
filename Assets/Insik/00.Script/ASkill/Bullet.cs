@@ -18,18 +18,11 @@ public class Bullet : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    private void OnEnable()
-    {
-        BulletDir = Camera.main.transform.forward;
-    }
-
+    
     private void Update()
     {
-        if (DectTarget() != null)
-        {
-            Debug.Log("asuirgweyu");
-            BulletDir = DectTarget().transform.position - transform.position;
-        }  
+            BulletDir = (DectTarget().transform.position - transform.position).normalized;
+         
     }
 
     private void FixedUpdate()
@@ -43,16 +36,18 @@ public class Bullet : MonoBehaviour
 
         float shortestdistance = int.MaxValue;
 
+        Collider target = null;
+
         foreach(var nearestTarget in targets)
         {
             float distance = (nearestTarget.transform.position - transform.position).magnitude;
             if(shortestdistance > distance)
             {
                 shortestdistance = distance;
-                return nearestTarget;
+                target = nearestTarget;
             }
         }
-        return null;
+        return target;
     }
 
     private void OnDrawGizmos()
