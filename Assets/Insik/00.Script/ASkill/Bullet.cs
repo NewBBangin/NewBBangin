@@ -21,8 +21,7 @@ public class Bullet : MonoBehaviour
     
     private void Update()
     {
-            BulletDir = (DectTarget().transform.position - transform.position).normalized;
-         
+       BulletDir = (DectTarget().transform.position - transform.position).normalized;   
     }
 
     private void FixedUpdate()

@@ -21,7 +21,7 @@ public class Minigun : MonoBehaviour
     
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.isPressed)
         {
             GameObject bullet;            
             if (bulletPool.Count > 0)
@@ -35,8 +35,15 @@ public class Minigun : MonoBehaviour
 
             bullet.transform.position = transform.position;
             bullet.SetActive(true);
-
+            StartCoroutine(Wait(bullet));
         }
+    }
+
+    IEnumerator Wait(GameObject bullet)
+    {
+        yield return new WaitForSeconds(2f);
+        bullet.SetActive(false);
+        bulletPool.Push(bullet);
     }
     
 }
