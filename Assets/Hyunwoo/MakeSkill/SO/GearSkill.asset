@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25940a0643805347b323bfd19711e77, type: 3}
   m_Name: GearSkill
   m_EditorClassIdentifier: Assembly-CSharp::Hyunwoo.MakeSkill.GearSkill
-  skillEnable: 0
+  skillEnable: 1

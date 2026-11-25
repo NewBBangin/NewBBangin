@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26bc87037fa4727b41b53150fbe0a76, type: 3}
+  m_Name: Block_02_DataSO
+  m_EditorClassIdentifier: Assembly-CSharp::sungwook.Scrtips.Data.BlockDataSO
+  xSize: 1
+  ySize: 1
+  zSize: 1
+  blockPrefab: {fileID: 1562986145715394586, guid: 6d845865abfa8474295ef95c508a6297, type: 3}
