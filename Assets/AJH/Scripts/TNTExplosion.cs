@@ -12,6 +12,7 @@ namespace AJH.Scripts
         private ParticleSystem _ps;
         
         private Transform _firePos;
+        private Transform _truck;
 
         public void Init()
         {
@@ -25,6 +26,7 @@ namespace AJH.Scripts
             }
 
             _firePos = firePos.transform;
+            _truck = _firePos.root;
             transform.position = _firePos.position;
 
             _ps = GetComponent<ParticleSystem>();
@@ -34,20 +36,34 @@ namespace AJH.Scripts
 
         private void Explosion()
         {
-            _ps.transform.position = _firePos.position;
-            
-            Collider[] coll = Physics.OverlapSphere(transform.position, _range);
+            _ps.transform.position = transform.position;
+
+            Vector3 blastCenter = _truck.position;
+            Collider[] coll = Physics.OverlapSphere(blastCenter, _range);
             Debug.Log("[TNT] 폭발");
-            
+
             _ps.Play();
-            
+
             foreach (Collider c in coll)
             {
+                if (c.transform.root == _truck) continue;
+
                 if (c.TryGetComponent(out Rigidbody rb))
                 {
-                    rb.AddExplosionForce(_fibre, transform.position, _range, 1f, ForceMode.Impulse);
+                    rb.AddExplosionForce(_fibre, blastCenter, _range, 1f, ForceMode.Impulse);
                 }
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Vector3 center = _truck != null ? _truck.position : transform.position;
+
+            Gizmos.color = new Color(1f, 0.3f, 0f, 0.2f);
+            Gizmos.DrawSphere(center, _range);
+
+            Gizmos.color = new Color(1f, 0.3f, 0f, 1f);
+            Gizmos.DrawWireSphere(center, _range);
         }
 
     }
