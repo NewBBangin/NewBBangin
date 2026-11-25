@@ -3,16 +3,25 @@ using UnityEngine.UI;
 
 public class BtnScript : MonoBehaviour
 {
-    [SerializeField] private Image _fadingPanel;
 
-    private void Awake()
+    public void StartNewGame()
     {
-        _fadingPanel.GetComponent<Image>();
+        Debug.Log("New Game Start");
     }
 
-    private void OnEnable()
+    public void LoadSaveFile()
     {
-        _fadingPanel.color = new Vector4(0, 0, 0, 0);
+        Debug.Log("Sav File loaded");
     }
 
+    public void QuitButtenClick()
+    {
+        Application.Quit();
+        Debug.Log("Quit");
+    }
+
+    public void HidePannel()
+    {
+        transform.parent.gameObject.SetActive(false);
+    }
 }
