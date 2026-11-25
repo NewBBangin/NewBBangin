@@ -376,7 +376,7 @@ MonoBehaviour:
   acceleration: 20
   impactResist: 0
   minSpeed: 0
-  sideSpeed: 20.06
+  sideSpeed: 35
   pressTime: 0.15
   turnTime: 0.1
   releaseTime: 0.3
