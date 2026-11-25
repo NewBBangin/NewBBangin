@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227bfabdd9df41e18cd81a27bbeb997b, type: 3}
   m_Name: TNTSkill
   m_EditorClassIdentifier: Assembly-CSharp::AJH.Scripts.TNTSkill
-  _interval: 0
-  _prefab: {fileID: 0}
+  _interval: 6
+  _prefab: {fileID: 1338017871918850, guid: 2be74428ff01468096a2061a71fc3d3d, type: 3}
