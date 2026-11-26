@@ -233,7 +233,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &204913249
@@ -406,7 +406,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &239378311
@@ -602,9 +602,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316a835ae11213f4e92eae456e2e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarMovement
-  speed: 10
+  rigid: {fileID: 485554578}
+  maxSpeed: 30
+  acceleration: 20
+  impactResist: 0
+  minSpeed: 0
   sideSpeed: 15
-  targetParent: {fileID: 485554576}
+  pressTime: 0.15
+  turnTime: 0.1
+  releaseTime: 0.3
+  inputDeadZone: 0.1
+  useRoadLimit: 0
+  roadCenterX: 0
+  roadHalfWidth: 8
 --- !u!1 &444972589
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hyunwoo.Scripts.Skill.SkillManager
   skillList:
   - {fileID: 11400000, guid: 4fea80c3aeeae0c4c888164be7d0b653, type: 2}
+  - {fileID: 11400000, guid: 567f8cd142546e34b81ae3617472e146, type: 2}
 --- !u!1 &827749590
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +1001,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &827749593
@@ -1163,7 +1174,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1040113655
@@ -1336,7 +1347,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1055924961
@@ -1636,7 +1647,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1264530798
@@ -1989,7 +2000,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1567970722
@@ -2280,8 +2291,8 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 9
-  grindTime: 0.18
-  pieceForce: 8
+  grindTime: 0.2
+  pieceForce: 3.08
   pieceLifetime: 2.5
 --- !u!1 &1975147403
 GameObject:
@@ -2335,7 +2346,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &1975147406
@@ -2614,7 +2625,7 @@ MonoBehaviour:
   brokenPrefab: {fileID: 1820404094835580872, guid: ebd99c22b4a91ab4ba394b023349eadb, type: 3}
   impactEffect: {fileID: 4389412620979312592, guid: c4a3908a0e249d749b97bb1e7a0fced8, type: 3}
   launchSpeed: 12
-  grindTime: 0.05
+  grindTime: 0.02
   pieceForce: 12
   pieceLifetime: 2.5
 --- !u!114 &2030728141

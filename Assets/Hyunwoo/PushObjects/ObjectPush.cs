@@ -16,6 +16,7 @@ public class ObjectPush : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (_breakable && _breakable.IsGrinding) return;
+        
         if (!collision.gameObject.CompareTag("Car")) return;
 
         Vector3 direction = transform.position - collision.transform.position;
