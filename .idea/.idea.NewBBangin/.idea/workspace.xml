@@ -10,6 +10,12 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="8bf2ffa8-5822-4dd7-ae6a-5e20e999605f" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NewBBangin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewBBangin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CHO/CHOScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CHO/CHOScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CHO/Car.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CHO/Car.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CHO/CarMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CHO/CarMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CHO/CarVisualTween.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CHO/CarVisualTween.cs" afterDir="false" />
     <list default="true" id="aa622e27-d800-4fb1-a80a-7893facdcc35" name="변경" comment="">
       <change afterPath="$PROJECT_DIR$/Assets/KSM/00.Scripts/SkillTooltip.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Assets/KSM/00.Scripts/SkillTooltip.cs.meta" afterDir="false" />
