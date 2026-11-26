@@ -17,6 +17,5 @@ public class Car : MonoBehaviour
    private void Update()
    {
       _moveCompo.SetMove(_inputCompo.MoveDir);
-      //_rotateCompo.SetMove(_inputCompo.MoveDir);
    }
 }
