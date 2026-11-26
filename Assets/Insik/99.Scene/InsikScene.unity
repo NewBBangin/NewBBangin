@@ -694,9 +694,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316a835ae11213f4e92eae456e2e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarMovement
-  speed: 10
+  rigid: {fileID: 0}
+  maxSpeed: 50
+  acceleration: 21
+  impactResist: 0
+  minSpeed: 18
   sideSpeed: 15
-  targetParent: {fileID: 1759736840}
+  pressTime: 0.3
+  turnTime: 0.34
+  releaseTime: 0.45
+  inputDeadZone: 0.1
+  useRoadLimit: 0
+  roadCenterX: 0
+  roadHalfWidth: 8
 --- !u!1 &1408643385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,43 +1274,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.11
+      value: 1.94
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.09
+      value: 3.81
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.636
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.98051554
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.19594392
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.009703526
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.01005597
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -22.609
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0.936
       objectReference: {fileID: 0}
     - target: {fileID: 6084809215390182855, guid: 43e9e244e4b87ce42bb671d926841561, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.988
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
