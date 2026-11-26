@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace KSM._00.Scripts
 {
@@ -9,8 +10,13 @@ namespace KSM._00.Scripts
         public float finalSpeed,finalMaxHP ;
 
         public bool sawBladeUnlocked;
+        public Dictionary<string, float> ReadTypeValues = new();
 
         private NodeManager _manager;
+        private UpgradeTarget[] unlockTargets =
+        {
+            UpgradeTarget.SawBlade,
+        };
 
         private void Start()
         {
@@ -18,7 +24,7 @@ namespace KSM._00.Scripts
 
             if (_manager == null)
             {
-                Debug.LogError("NodeManager가 없습니다.", this);
+                Debug.LogError("NodeManager가 없습니다.");
                 return;
             }
 
@@ -38,13 +44,23 @@ namespace KSM._00.Scripts
         public void RefreshStats()
         {
             if (_manager == null) return;
+            
+            foreach (UpgradeTarget target in unlockTargets)
+            {
+                bool unlocked = _manager.IsUpgradeUnlocked(target);
+
+                if (unlocked)
+                {
+                    Debug.Log($"{target}: 해금 완료");
+                }
+                else
+                {
+                    Debug.Log($"{target}: 미해금");
+                }
+            }
             finalSpeed = _manager.CalculateStat(UpgradeTarget.MaxSpeed, baseSpeed);
             finalMaxHP = _manager.CalculateStat(UpgradeTarget.MaxHP, baseMaxHP);
-                _manager.IsUpgradeUnlocked(UpgradeTarget.SawBlade);
-                
-                
-                
-           _manager.IsUpgradeUnlocked(UpgradeTarget.SawBlade);
+            
         }
     }
 }
