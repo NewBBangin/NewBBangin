@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/RetroToon/Scenes/RetroBurgerStreet.unity
+    path: Assets/sungwook/@Resources/ForeignAssets/RetroToon/Scenes/RetroBurgerStreet.unity
     guid: 4105967e43540b44c9761cf091cc8ffe
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93b07054d5d4ecaab97915db3d8c355, type: 3}
+  m_Name: Obstacle_RoadworksBarrier
+  m_EditorClassIdentifier: Assembly-CSharp::sungwook.ObstacleDataSO
+  obstaclePrefab: {fileID: 100010, guid: f2817da4eb12456ca2191f0d4a8af401, type: 3}

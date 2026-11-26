@@ -1,92 +1,131 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
-    public FloorType[,,] VoxelGrid { get; private set; }
-    
-    private FloorDataSO  floorDataSO;
-    private int          sizeX;
-    private int          sizeY;
-    private int          sizeZ;
-    
-    public void InitializeChunk(FloorDataSO dataSO, Vector3 spawnPosition)
+    [SerializeField] private BoxCollider floorCollider;
+
+    public int ChunkIndex { get; private set; }
+    public Bounds WorldBounds => TransformBounds(localBounds, transform.localToWorldMatrix);
+
+    private Bounds localBounds;
+    private bool isInitialized;
+    private readonly List<GameObject> spawnedObjects = new();
+
+    public bool InitializeChunk()
     {
-        floorDataSO = dataSO;
-        sizeX       = dataSO.chunkSizeX;
-        sizeY       = dataSO.chunkSizeY;
-        sizeZ       = dataSO.chunkSizeZ;
+        if (isInitialized) return true;
+        if (!TryGetLocalFloorBounds(transform, floorCollider, out localBounds)) return false;
 
-        transform.position = spawnPosition;
-        VoxelGrid          = new FloorType[sizeX, sizeY, sizeZ];
-
-        GenerateVoxelData();
-        BuildVoxelBlocks();
+        isInitialized = HasFloorArea(WorldBounds);
+        return isInitialized;
     }
-    
-    private void GenerateVoxelData()
+
+    internal static bool TryMeasurePrefab(GameObject prefab, out Bounds bounds)
     {
-        for (int x = 0; x < sizeX; x++)
+        bounds = default;
+        Chunk chunk = prefab.GetComponent<Chunk>();
+        Transform root = prefab.transform;
+        if (!TryGetLocalFloorBounds(root, chunk != null ? chunk.floorCollider : null, out Bounds local))
+            return false;
+
+        bounds = TransformBounds(local, Matrix4x4.TRS(Vector3.zero, root.localRotation, root.localScale));
+        return HasFloorArea(bounds);
+    }
+
+    private static bool HasFloorArea(Bounds bounds)
+    {
+        return bounds.size.x > 0.001f && bounds.size.z > 0.001f;
+    }
+
+    private static bool TryGetLocalFloorBounds(Transform root, BoxCollider floor, out Bounds bounds)
+    {
+        if (floor == null) floor = root.GetComponent<BoxCollider>();
+        if (floor != null)
         {
-            for (int z = 0; z < sizeZ; z++)
-            {
-                VoxelGrid[x, 0, z] = FloorType.Floor_01;
-                
-                for (int y = 1; y < sizeY; y++)
+            bounds = TransformBounds(new Bounds(floor.center, floor.size),
+                root.worldToLocalMatrix * floor.transform.localToWorldMatrix);
+            return true;
+        }
+
+        Renderer[] renderers = root.GetComponentsInChildren<Renderer>(true);
+        bounds = default;
+        if (renderers.Length == 0) return false;
+        bounds = TransformBounds(renderers[0].localBounds,
+            root.worldToLocalMatrix * renderers[0].transform.localToWorldMatrix);
+        for (int i = 1; i < renderers.Length; i++)
+        {
+            bounds.Encapsulate(TransformBounds(renderers[i].localBounds,
+                root.worldToLocalMatrix * renderers[i].transform.localToWorldMatrix));
+        }
+        return true;
+    }
+
+    public void Activate(int chunkIndex, Vector3 position)
+    {
+        ChunkIndex = chunkIndex;
+        transform.position = position;
+        gameObject.SetActive(true);
+    }
+
+    public void Recycle()
+    {
+        ClearSpawnedObjects();
+        gameObject.SetActive(false);
+    }
+
+    public bool TryGetRandomSpawnPosition(float edgePadding, float heightOffset, out Vector3 position)
+    {
+        position = default;
+        if (!isInitialized || !gameObject.activeInHierarchy) return false;
+
+        Bounds bounds = WorldBounds;
+        float paddingX = Mathf.Clamp(edgePadding, 0f, bounds.extents.x);
+        float paddingZ = Mathf.Clamp(edgePadding, 0f, bounds.extents.z);
+        position = new Vector3(
+            Random.Range(bounds.min.x + paddingX, bounds.max.x - paddingX),
+            bounds.max.y + heightOffset,
+            Random.Range(bounds.min.z + paddingZ, bounds.max.z - paddingZ));
+        return true;
+    }
+
+    public void RegisterSpawnedObject(GameObject spawnedObject)
+    {
+        if (spawnedObject == null) return;
+        spawnedObject.transform.SetParent(transform, true);
+        spawnedObjects.Add(spawnedObject);
+    }
+
+    private void ClearSpawnedObjects()
+    {
+        foreach (GameObject spawnedObject in spawnedObjects)
+        {
+            if (spawnedObject == null) continue;
+            spawnedObject.SetActive(false);
+            Destroy(spawnedObject);
+        }
+        spawnedObjects.Clear();
+    }
+
+    private void OnDestroy()
+    {
+        ClearSpawnedObjects();
+    }
+
+    private static Bounds TransformBounds(Bounds bounds, Matrix4x4 matrix)
+    {
+        Bounds result = new Bounds(matrix.MultiplyPoint3x4(bounds.min), Vector3.zero);
+        for (int x = 0; x < 2; x++)
+            for (int y = 0; y < 2; y++)
+                for (int z = 0; z < 2; z++)
                 {
-                    VoxelGrid[x, y, z] = FloorType.Empty;
+                    Vector3 corner = new Vector3(
+                        x == 0 ? bounds.min.x : bounds.max.x,
+                        y == 0 ? bounds.min.y : bounds.max.y,
+                        z == 0 ? bounds.min.z : bounds.max.z);
+                    result.Encapsulate(matrix.MultiplyPoint3x4(corner));
                 }
-            }
-        }
-    }
-    
-    private void BuildVoxelBlocks()
-    {
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        var blockPrefabs = floorDataSO.CreateBlockPrefabLookup();
-        if (blockPrefabs.Count == 0) return;
-
-        for (int x = 0; x < sizeX; x++)
-        {
-            for (int y = 0; y < sizeY; y++)
-            {
-                for (int z = 0; z < sizeZ; z++)
-                {
-                    FloorType floorType = VoxelGrid[x, y, z];
-                    if (blockPrefabs.TryGetValue(floorType, out GameObject prefab) && prefab != null)
-                    {
-                        Vector3 localPos = new Vector3(x, y, z);
-                        GameObject block = Instantiate(prefab, transform);
-                        block.transform.localPosition = localPos;
-                    }
-                }
-            }
-        }
-    }
-
-    public void SetVoxelData(int x, int y, int z, FloorType type)
-    {
-        if (IsValidIndex(x, y, z))
-        {
-            VoxelGrid[x, y, z] = type;
-        }
-    }
-    
-    public FloorType PopAndZero(int x, int y, int z)
-    {
-        if (!IsValidIndex(x, y, z)) return FloorType.Empty;
-
-        FloorType originalType = VoxelGrid[x, y, z];
-        VoxelGrid[x, y, z] = FloorType.Empty;
         
-        return originalType;
-    }
-
-    private bool IsValidIndex(int x, int y, int z)
-    {
-        return x >= 0 && x < sizeX && y >= 0 && y < sizeY && z >= 0 && z < sizeZ;
+        return result;
     }
 }
