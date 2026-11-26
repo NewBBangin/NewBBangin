@@ -602,9 +602,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316a835ae11213f4e92eae456e2e6d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarMovement
-  speed: 10
+  rigid: {fileID: 485554578}
+  maxSpeed: 30
+  acceleration: 20
+  impactResist: 0
+  minSpeed: 0
   sideSpeed: 15
-  targetParent: {fileID: 485554576}
+  pressTime: 0.15
+  turnTime: 0.1
+  releaseTime: 0.3
+  inputDeadZone: 0.1
+  useRoadLimit: 0
+  roadCenterX: 0
+  roadHalfWidth: 8
 --- !u!1 &444972589
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hyunwoo.Scripts.Skill.SkillManager
   skillList:
   - {fileID: 11400000, guid: 4fea80c3aeeae0c4c888164be7d0b653, type: 2}
+  - {fileID: 11400000, guid: 567f8cd142546e34b81ae3617472e146, type: 2}
 --- !u!1 &827749590
 GameObject:
   m_ObjectHideFlags: 0
