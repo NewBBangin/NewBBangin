@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using KSM._00.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class SkillTreeView : MonoBehaviour
     public RectTransform nodesLayer;
     public SkillNodeUI nodePrefab;
     public RectTransform linePrefab;
+    public SkillTreePanZoom zoomPan;
+   
 
     public float spacing = 140f;
     public float lineThickness = 6f;
@@ -57,14 +60,27 @@ public class SkillTreeView : MonoBehaviour
             bool highlighted = NodeManager.Instance.IsBought(line.fromId)
                                && (NodeManager.Instance.IsBought(line.toId) || NodeManager.Instance.IsUnlock(line.toId));
 
-            line.image.color = highlighted
+            Color target = highlighted
                 ? new Color(1f, 0.65f, 0.2f, 1f)
                 : new Color(0.25f, 0.22f, 0.18f, 1f);
 
+            line.image.DOKill(); 
             if (justShown)
-                StartCoroutine(GrowLine(line.image, 0.25f));
+            {
+                line.image.color = target;
+                line.image.fillAmount = 0f;
+                line.image.DOFillAmount(1f, 0.25f)
+                    .SetEase(Ease.OutQuad)
+                    .SetUpdate(true)
+                    .SetLink(line.image.gameObject);
+            }
             else
+            {
                 line.image.fillAmount = 1f;
+                line.image.DOColor(target, 0.2f)
+                    .SetUpdate(true)
+                    .SetLink(line.image.gameObject);
+            }
         }
     }
     private IEnumerator GrowLine(Image img, float duration)
@@ -83,6 +99,7 @@ public class SkillTreeView : MonoBehaviour
     public void Build()
     {
         ClearView();
+        bool centered = false;
 
         var grid = NodeManager.Instance.LayoutGrid;
         var nodes = NodeManager.Instance.Nodes;
@@ -99,12 +116,17 @@ public class SkillTreeView : MonoBehaviour
                 GridToPos(data.row, data.col, rowCount, colCount);
 
             _nodeUIs[data.id] = ui;
+            if (data.parents.Count == 0 && !centered)
+            {
+                zoomPan.CenterOn(rt.anchoredPosition);
+                centered = true;
+            }
         }
         foreach (NodeData data in nodes.Values)
         {
             foreach (string childId in data.children)
             {
-                RectTransform fromNode = (RectTransform)_nodeUIs[data.id].transform;
+               RectTransform fromNode = (RectTransform)_nodeUIs[data.id].transform;
 
                 RectTransform toNode = (RectTransform)_nodeUIs[childId].transform;
 
@@ -115,10 +137,11 @@ public class SkillTreeView : MonoBehaviour
                 Image lineImage = line.GetComponent<Image>();
                 SkillLineUI lines = new();
                 lines.image = lineImage;
-                lines.fromId = data.id;
+                lines.fromId = data.id; 
                 lines.toId = childId;
 
                 _lineUIs.Add(lines);
+                
             }
         }
     }

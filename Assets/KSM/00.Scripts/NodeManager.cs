@@ -47,6 +47,7 @@ public class NodeManager : MonoBehaviour
       if(!CanBuy(id)) return false;
       coins -= _nodeDict[id].price;
       _bought.Add(id);
+      Debug.Log($"현재 속도 증가량: {GetAddBonus(UpgradeTarget.MaxSpeed)}");
       Debug.Log(id +$"노드를{_nodeDict[id].price}가격에 구매하였습니다 남은 코인 {coins}");
       OnChanged?.Invoke();
       return true;
@@ -147,6 +148,11 @@ public class NodeManager : MonoBehaviour
          data.name = cell[1].Trim();
          data.price = int.Parse(cell[2].Trim());
          data.effect = cell[3].Trim();
+         data.target = Enum.Parse<UpgradeTarget>(cell[5].Trim());
+         data.method = Enum.Parse<UpgradeMethod>(cell[6].Trim());
+         data.value = float.Parse(cell[7].Trim(),System.Globalization.CultureInfo.InvariantCulture);
+         Debug.Log($" 아이디 {data.id}: 타겟 {data.target} 메소드 {data.method} 값 {data.value}");
+         
 
          if (cell.Length > 4)
             data.directions = cell[4].Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -213,5 +219,67 @@ public class NodeManager : MonoBehaviour
          string start = node.parents.Count == 0 ? " ← 시작 노드" : "";
          Debug.Log($"{node.id} 사면 열림: [{string.Join(", ", node.children)}]{start}");
       }
+
+  
    }
+
+   public float GetAddBonus(UpgradeTarget target)
+   {
+      float total = 0f;
+      foreach (var id in _bought)
+      {
+         NodeData data =  _nodeDict[id];
+         if (data.target == target && data.method == UpgradeMethod.Add)
+         {
+            total += data.value;
+         }
+         
+      }
+   return total;
+
+   }
+   public float GetMultiplier(UpgradeTarget target)
+   {
+      float total = 1f;
+      foreach (var id in _bought)
+      {
+         NodeData data =  _nodeDict[id];
+         if (data.target == target && data.method == UpgradeMethod.Multiply)
+         {
+            total *= data.value;
+         }
+         
+      }
+       
+
+      return total;
+   }
+   
+   public float CalculateStat(UpgradeTarget target, float baseValue)
+   {
+      return (baseValue + GetAddBonus(target)) * GetMultiplier(target);
+   }
+
+   public bool IsUpgradeUnlocked(UpgradeTarget target)
+   {
+      if (target == UpgradeTarget.None)
+      {
+         return false;
+      }
+
+      foreach (string id in _bought)
+      {
+         NodeData data = _nodeDict[id];
+
+         if (data.target == target &&
+             data.method == UpgradeMethod.Unlock)
+         {
+            return true;
+         }
+      }
+
+      return false;
+   }
+
+
 }
