@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,10 +27,10 @@ namespace sungwook
                 targetParent.position += changeTrm + sideMove;
             }
         }
-
-        private void OnMove(InputValue value)
+        
+        public void SetMoveInput(Vector2 input)
         {
-            moveInput = value.Get<Vector2>();
+            moveInput = input;
             if (moveInput.x != 0)
             {
                 IsMoving = true;

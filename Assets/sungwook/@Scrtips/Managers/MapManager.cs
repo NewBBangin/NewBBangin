@@ -1,41 +1,24 @@
+using System.Linq;
 using UnityEngine;
-using System.Collections.Generic;
-
-public enum FloorType
-{
-    Empty,
-    Floor_01,
-    Floor_02,
-}
-
-public enum BlockType
-{
-    Red,
-    Green,
-}
 
 public class MapManager : Singleton<MapManager>
 {
     [Header("References")]
+    public Transform playerTransform;
     public Transform cameraTransform;
-    public GameObject chunkPrefab;
+    public GameObject[] chunkPrefabs = System.Array.Empty<GameObject>();
 
     [Header("Settings")]
+    [Min(0)] 
     public int poolSize = 10;
+    [Min(1)] 
     public int visibleChunks = 4;
+    [Min(0)] 
+    public int chunksBehindPlayer = 1;
+    public bool IsInitialized => ChunkManager.Instance != null && ChunkManager.Instance.IsInitialized;
+    public Chunk FrontChunk => IsInitialized ? ChunkManager.Instance.FrontChunk : null;
 
-    [SerializeField]
-    private FloorDataSO floorData;
-
-    public Dictionary<FloorType, Chunk> FloorDict { get; private set; }
-    public bool IsInitialized { get; private set; } = false;
-    
-    private List<Chunk> chunkPool;
-    private Queue<Chunk> activeChunks;
-    private float nextSpawnZ = 0f;
-    private float chunkLength;
-
-    void Awake()
+    private void Start()
     {
         Initialize();
     }
@@ -43,85 +26,21 @@ public class MapManager : Singleton<MapManager>
     public void Initialize()
     {
         if (IsInitialized) return;
-        
-        chunkLength = floorData.chunkSizeZ;
-        
-        chunkPool = new List<Chunk>();
-        activeChunks = new Queue<Chunk>();
-        FloorDict = new Dictionary<FloorType, Chunk>();
-        
-        IsInitialized = true;
-    }
 
-    private void Start()
-    {
-        for (int i = 0; i < poolSize; ++i)
+        if (playerTransform == null)
         {
-            GameObject chunkObj = Instantiate(chunkPrefab, transform);
-            chunkObj.SetActive(false);
-            
-            Chunk chunkComponent = chunkObj.GetComponent<Chunk>();
-            chunkPool.Add(chunkComponent);
-        }
-        
-        for (int i = 0; i < visibleChunks; ++i)
-        {
-            SpawnChunk();
-        }
-    }
-
-    private void Update()
-    {
-        CheckChunks();
-    }
-    
-    private void SpawnChunk()
-    {
-        Chunk chunk = GetPooledChunk();
-        
-        if (chunk != null)
-        {
-            Vector3 spawnPos = new Vector3(0, 0, nextSpawnZ); 
-            chunk.gameObject.SetActive(true);
-            
-            chunk.InitializeChunk(floorData, spawnPos);
-            
-            activeChunks.Enqueue(chunk);
-            nextSpawnZ += chunkLength;   
-        }
-    }
-    
-    private void CheckChunks()
-    {
-        if (activeChunks.Count == 0) return;
-        
-        Chunk oldestChunk = activeChunks.Peek();
-        
-        if (cameraTransform.position.z > oldestChunk.transform.position.z + chunkLength * 1.5f)
-        {
-            Chunk recycledChunk = activeChunks.Dequeue();
-            recycledChunk.gameObject.SetActive(false);
-            
-            SpawnChunk();
-        }
-    }
-    
-    Chunk GetPooledChunk()
-    {
-        foreach (Chunk chunk in chunkPool)
-        {
-            if (!chunk.gameObject.activeInHierarchy)
+            sungwook.CarMovement car = FindAnyObjectByType<sungwook.CarMovement>();
+            if (car != null)
             {
-                return chunk;
+                playerTransform = car.targetParent != null ? car.targetParent : car.transform;
             }
         }
+
+        Transform target = playerTransform != null ? playerTransform : cameraTransform;
         
-        GameObject newChunkObj = Instantiate(chunkPrefab, transform);
-        newChunkObj.name = chunkPrefab.name;
-        newChunkObj.SetActive(false);
-        
-        Chunk newChunk = newChunkObj.GetComponent<Chunk>();
-        chunkPool.Add(newChunk);
-        return newChunk;
+        GameObject[] validPrefabs = chunkPrefabs?.Where(prefab => prefab != null).Distinct().ToArray() 
+                                    ?? System.Array.Empty<GameObject>();
+        ChunkManager.Instance.Initialize(validPrefabs, target, poolSize, visibleChunks,
+            chunksBehindPlayer, transform.position);
     }
 }
