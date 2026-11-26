@@ -685,6 +685,7 @@ Transform:
   - {fileID: 197123517}
   - {fileID: 533430279}
   - {fileID: 2025447167}
+  - {fileID: 1367226369}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &485554577
@@ -948,7 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hyunwoo.Scripts.Skill.SkillManager
   skillList:
   - {fileID: 11400000, guid: 4fea80c3aeeae0c4c888164be7d0b653, type: 2}
-  - {fileID: 11400000, guid: 567f8cd142546e34b81ae3617472e146, type: 2}
+  - {fileID: 11400000, guid: 1268738b52cf1b24285ff73d6e447c0e, type: 2}
 --- !u!1 &827749590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,6 +1808,37 @@ Transform:
   - {fileID: 827749591}
   - {fileID: 1567970720}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1367226368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1367226369}
+  m_Layer: 0
+  m_Name: FirePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1367226369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367226368}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: 1.1400001, z: 3.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 485554576}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517909702
 GameObject:
