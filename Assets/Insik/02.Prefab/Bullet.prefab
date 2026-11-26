@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 64
-  dectRange: 1024
+  dectRange: 32
   whatisTarget:
     serializedVersion: 2
     m_Bits: 64

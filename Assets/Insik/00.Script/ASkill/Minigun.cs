@@ -34,6 +34,7 @@ public class Minigun : MonoBehaviour
             }
 
             bullet.transform.position = transform.position;
+            bullet.transform.rotation = transform.rotation;
             bullet.SetActive(true);
             StartCoroutine(Wait(bullet));
         }

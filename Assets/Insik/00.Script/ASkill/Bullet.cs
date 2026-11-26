@@ -18,11 +18,30 @@ public class Bullet : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    
-    private void Update()
+    private void OnEnable()
     {
-       BulletDir = (DectTarget().transform.position - transform.position).normalized;   
+        if(DectTarget() == null)
+        {
+            BulletDir = transform.forward; 
+            return;
+        }
+
+        Vector3 Dir = (DectTarget().transform.position - transform.position).normalized;
+        float s = Vector3.Dot(transform.forward, Dir);
+        if (s >= 0.5f)
+        {
+            BulletDir = Dir;
+            Debug.Log(s);
+        }
+
+        else if (s < 0.5f)
+        {
+            BulletDir = transform.forward;
+        }
+
     }
+
+
 
     private void FixedUpdate()
     {
