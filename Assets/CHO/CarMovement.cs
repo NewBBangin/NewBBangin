@@ -4,19 +4,19 @@ using UnityEngine.InputSystem;
 
 public class CarMovement : MonoBehaviour
 {
-     [SerializeField] private Rigidbody rigid;
+    [SerializeField] private Rigidbody rigid;
 
     [Header("Forward")]
-    [SerializeField] private float maxSpeed = 30f;
-    [SerializeField] private float acceleration = 20f;
+    [SerializeField] private float maxSpeed = 50f;
+    [SerializeField] private float acceleration = 21f;
     [SerializeField, Range(0f, 1f)] private float impactResist = 0f;
-    [SerializeField] private float minSpeed = 0f;
+    [SerializeField] private float minSpeed = 18f;
 
     [Header("Side")]
-    [SerializeField] private float sideSpeed = 12f;
-    [SerializeField] private float pressTime = 0.15f;
-    [SerializeField] private float turnTime = 0.1f;
-    [SerializeField] private float releaseTime = 0.3f;
+    [SerializeField] private float sideSpeed = 11f;
+    [SerializeField] private float pressTime = 0.3f;
+    [SerializeField] private float turnTime = 0.34f;
+    [SerializeField] private float releaseTime = 0.45f;
     [SerializeField] private float inputDeadZone = 0.1f;
 
     [Header("Road")]
@@ -28,8 +28,13 @@ public class CarMovement : MonoBehaviour
     private float speedMultiplier = 1f;
     private float currentSide;
     private float inputX;
+    private float forwardAccel;
+
+    public event System.Action<float> OnImpact;
 
     public float CurrentSpeed => currentSpeed;
+    public float ForwardAccel => forwardAccel;
+    public float Acceleration => acceleration;
     public float MaxSpeed => maxSpeed;
     public float InputX => inputX;
     public float SideRatio => sideSpeed > 0f ? currentSide / sideSpeed : 0f;
@@ -70,8 +75,10 @@ public class CarMovement : MonoBehaviour
 
     private void UpdateForward(float dt)
     {
+        float before = currentSpeed;
         float target = maxSpeed * speedMultiplier;
         currentSpeed = Mathf.MoveTowards(currentSpeed, target, acceleration * dt);
+        forwardAccel = (currentSpeed - before) / dt;
     }
 
     private void UpdateSide(float dt)
@@ -103,7 +110,9 @@ public class CarMovement : MonoBehaviour
 
     public void DownSpeed(float value)
     {
+        float before = currentSpeed;
         currentSpeed = Mathf.Max(minSpeed, currentSpeed - value * (1f - impactResist));
+        OnImpact?.Invoke(before - currentSpeed);
     }
 
     public void UpSpeed(float value)
@@ -125,56 +134,4 @@ public class CarMovement : MonoBehaviour
     {
         impactResist = Mathf.Clamp01(value);
     }
-    
-    /*[SerializeField] private float speed;
-    [SerializeField] private float sideSpeed;   // 추가: 좌우 속도 분리
-    [SerializeField] private float sideAccel;   // 누를 때 붙는 속도
-    [SerializeField] private float sideDecel;   // 뗄 때 멈추는 속도
-    [SerializeField] private float sideTurn;    // 반대 방향 눌렀을 때 꺾이는 속도
-    private float currentSide;              
-    private Rigidbody _rigid;
-    public Transform targetParent;
-    private Vector3 moveDir;
-
-    private void Awake()
-    {
-        _rigid = GetComponentInParent<Rigidbody>();
-        _rigid.isKinematic = true;   // 인스펙터에서 체크했으면 없어도 됨
-    }
-
-    private void Update()
-    {
-        Vector3 changeTrm = new Vector3(0, 0, 1) * Time.deltaTime * speed;
-        
-        float targetSide = moveDir.x * sideSpeed;
-
-        float rate = sideAccel;
-        if (moveDir.x == 0) rate = sideDecel/2;
-        else if (currentSide != 0 && Mathf.Sign(targetSide) != Mathf.Sign(currentSide)) rate = sideTurn;
-        
-        currentSide = Mathf.MoveTowards(currentSide, targetSide, rate * Time.deltaTime);
-        Vector3 sideMove = new Vector3(currentSide, 0, 0) * Time.deltaTime;
-        
-        if (targetParent != null)
-        {
-            targetParent.position += changeTrm + sideMove;
-        }
-    }
-
-    public void SetMove(Vector3 move)
-    {
-        moveDir = move;
-    }
-
-    public void DownSpeed(float value)
-    {
-        speed -= value;
-    }
-
-    public void UpSpeed(float value)
-    {
-        speed += value;
-    }*/
-
-    
 }
