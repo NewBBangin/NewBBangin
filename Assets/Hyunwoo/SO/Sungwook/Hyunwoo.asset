@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9f972772f64ae9a797dc1bb23fd31c, type: 3}
   m_Name: Hyunwoo
   m_EditorClassIdentifier: Assembly-CSharp::sungwook.StageDataSO
-  spawnTime: 0.3
+  spawnTime: 0.1
   obstacles:
   - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: b285b23de5f153d4bbde51fae2df083a, type: 2}
+  - {fileID: 11400000, guid: 13cf0ea2d817ef64187d073697d0c58c, type: 2}
