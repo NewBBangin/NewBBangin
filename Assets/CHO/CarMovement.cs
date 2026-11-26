@@ -4,31 +4,134 @@ using UnityEngine.InputSystem;
 
 public class CarMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float sideSpeed;   // 추가: 좌우 속도 분리
-    private Rigidbody _rigid;
-    public Transform targetParent;
-    private Vector2 moveInput;
+    [SerializeField] private Rigidbody rigid;
+
+    [Header("Forward")]
+    [SerializeField] private float maxSpeed = 50f;
+    [SerializeField] private float acceleration = 21f;
+    [SerializeField, Range(0f, 1f)] private float impactResist = 0f;
+    [SerializeField] private float minSpeed = 18f;
+
+    [Header("Side")]
+    [SerializeField] private float sideSpeed = 11f;
+    [SerializeField] private float pressTime = 0.3f;
+    [SerializeField] private float turnTime = 0.34f;
+    [SerializeField] private float releaseTime = 0.45f;
+    [SerializeField] private float inputDeadZone = 0.1f;
+
+    [Header("Road")]
+    [SerializeField] private bool useRoadLimit = false;
+    [SerializeField] private float roadCenterX = 0f;
+    [SerializeField] private float roadHalfWidth = 8f;
+
+    private float currentSpeed;
+    private float speedMultiplier = 1f;
+    private float currentSide;
+    private float inputX;
+    private float forwardAccel;
+
+    public event System.Action<float> OnImpact;
+
+    public float CurrentSpeed => currentSpeed;
+    public float ForwardAccel => forwardAccel;
+    public float Acceleration => acceleration;
+    public float MaxSpeed => maxSpeed;
+    public float InputX => inputX;
+    public float SideRatio => sideSpeed > 0f ? currentSide / sideSpeed : 0f;
 
     private void Awake()
     {
-        _rigid = GetComponentInParent<Rigidbody>();
-        _rigid.isKinematic = true;   // 추가: 인스펙터에서 체크했으면 없어도 됨
+        if (rigid == null) rigid = GetComponentInParent<Rigidbody>();
+
+        rigid.isKinematic = true;
+        rigid.interpolation = RigidbodyInterpolation.Interpolate;
+        rigid.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+
+        currentSpeed = maxSpeed;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Vector3 changeTrm = new Vector3(0, 0, 1) * Time.deltaTime * speed;
-        Vector3 sideMove = new Vector3(moveInput.x, 0, 0) * Time.deltaTime * sideSpeed;   // 변경: speed → sideSpeed
+        float dt = Time.fixedDeltaTime;
 
-        if (targetParent != null)
+        UpdateForward(dt);
+        UpdateSide(dt);
+
+        Vector3 next = rigid.position + new Vector3(currentSide, 0f, currentSpeed) * dt;
+
+        if (useRoadLimit)
         {
-            targetParent.position += changeTrm + sideMove;
+            float min = roadCenterX - roadHalfWidth;
+            float max = roadCenterX + roadHalfWidth;
+            if (next.x < min || next.x > max)
+            {
+                next.x = Mathf.Clamp(next.x, min, max);
+                currentSide = 0f;
+            }
         }
+
+        rigid.MovePosition(next);
+    }
+
+    private void UpdateForward(float dt)
+    {
+        float before = currentSpeed;
+        float target = maxSpeed * speedMultiplier;
+        currentSpeed = Mathf.MoveTowards(currentSpeed, target, acceleration * dt);
+        forwardAccel = (currentSpeed - before) / dt;
+    }
+
+    private void UpdateSide(float dt)
+    {
+        float input = Mathf.Abs(inputX) < inputDeadZone ? 0f : inputX;
+        float target = input * sideSpeed;
+
+        float time;
+        if (input == 0f)
+            time = releaseTime;
+        else if (currentSide != 0f && Mathf.Sign(target) != Mathf.Sign(currentSide))
+            time = turnTime;
+        else
+            time = pressTime;
+
+        float rate = sideSpeed / Mathf.Max(time, 0.0001f);
+        currentSide = Mathf.MoveTowards(currentSide, target, rate * dt);
+    }
+
+    public void SetMove(Vector3 move)
+    {
+        inputX = move.x;
     }
 
     private void OnMove(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        inputX = value.Get<Vector2>().x;
+    }
+
+    public void DownSpeed(float value)
+    {
+        float before = currentSpeed;
+        currentSpeed = Mathf.Max(minSpeed, currentSpeed - value * (1f - impactResist));
+        OnImpact?.Invoke(before - currentSpeed);
+    }
+
+    public void UpSpeed(float value)
+    {
+        currentSpeed += value;
+    }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
+    }
+
+    public void AddMaxSpeed(float value)
+    {
+        maxSpeed += value;
+    }
+
+    public void SetImpactResist(float value)
+    {
+        impactResist = Mathf.Clamp01(value);
     }
 }

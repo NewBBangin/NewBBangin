@@ -49,6 +49,20 @@ namespace Hyunwoo.MakeSkill.Editor
                 rotor.transform.SetParent(mount, false);
                 rotor.GetComponent<GearRotor>().degreesPerSecond = side * 1250f;
                 PrefabUtility.RecordPrefabInstancePropertyModifications(rotor.GetComponent<GearRotor>());
+
+                var hitbox = new GameObject("GrindHitbox", typeof(BoxCollider), typeof(GearGrinder), typeof(AudioSource));
+                hitbox.transform.SetParent(mount, false);
+                var trigger = hitbox.GetComponent<BoxCollider>();
+                trigger.isTrigger = true;
+                trigger.size = new Vector3(1.86f, .3f, 1.86f);
+                var sound = hitbox.GetComponent<AudioSource>();
+                sound.playOnAwake = false;
+                sound.spatialBlend = .3f;
+                sound.volume = .25f;
+                sound.clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Hyunwoo/PushObjects/Grind.wav");
+                var grinder = new SerializedObject(hitbox.GetComponent<GearGrinder>());
+                grinder.FindProperty("grindSound").objectReferenceValue = sound;
+                grinder.ApplyModifiedPropertiesWithoutUndo();
             }
             var pairPrefab = PrefabUtility.SaveAsPrefabAsset(pair, PairPath);
             Object.DestroyImmediate(pair);
@@ -118,7 +132,8 @@ namespace Hyunwoo.MakeSkill.Editor
             var rotors = pair ? pair.GetComponentsInChildren<GearRotor>() : Array.Empty<GearRotor>();
             Check("Exactly two spinning gears", rotors.Length == 2);
             Check("Opposite rotation directions", rotors.Length == 2 && rotors[0].degreesPerSecond * rotors[1].degreesPerSecond < 0);
-            Check("Visual-only attachments add no collision shapes", pair && pair.GetComponentsInChildren<Collider>().Length == 0);
+            var hitboxes = pair ? pair.GetComponentsInChildren<Collider>(true) : Array.Empty<Collider>();
+            Check("Two grinding triggers", hitboxes.Length == 2 && hitboxes.All(c => c.isTrigger && c.GetComponent<GearGrinder>()));
             Check("All mesh references are persistent", pair && pair.GetComponentsInChildren<MeshFilter>().All(f => f.sharedMesh && AssetDatabase.Contains(f.sharedMesh)));
             Check("All materials have supported shaders", pair && pair.GetComponentsInChildren<MeshRenderer>().All(r => r.sharedMaterials.All(m => m && m.shader && m.shader.isSupported)));
             if (pair)
