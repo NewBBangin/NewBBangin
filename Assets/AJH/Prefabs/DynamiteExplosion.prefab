@@ -4922,7 +4922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AJH.Scripts.TNTExplosion
   _fibre: 200
-  _range: 5
+  _range: 25
   _fuseTime: 1
 --- !u!1 &1481492401758046
 GameObject:

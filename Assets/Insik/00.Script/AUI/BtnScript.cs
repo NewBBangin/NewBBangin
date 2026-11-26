@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BtnScript : MonoBehaviour
 {
 
+
     public void StartNewGame()
     {
         Debug.Log("New Game Start");
